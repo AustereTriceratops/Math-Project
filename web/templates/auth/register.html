@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <form method="POST">
+        {{ form.csrf_token }}
+
+        {{ form.username.label }}
+        {{ form.username(required="required") }}<br/>
+
+        {{ form.password.label }}
+        {{ form.password(required="required") }}<br/>
+
+        {{ form.email.label }}
+        {{ form.email(required="required", id="email", oninput="validate_email()") }}<br/>
+
+        <label for="email_conf">Confirm Email</label>
+        <input type="email" id="email_conf" autocomplete="off" required oninput="validate_email()"><br/>
+        <input type="submit" value="Register">
+    </form>
+    <script language="javascript" type="text/javascript">
+        function validate_email() {
+            email = document.getElementById('email');
+            email_conf = document.getElementById('email_conf');
+            if (email.value != email_conf.value) {
+                email_conf.setCustomValidity('Email must be matching.');
+            }
+            else {
+                email_conf.setCustomValidity('');
+            }
+        }
+    </script>
+</body>
+</html>
